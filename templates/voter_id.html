@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block title %}Voter ID{% endblock %}
+
+{% block content %}
+    <h2>Enter your Voter ID for {{ constituency.name }}</h2>
+    <form method="POST" action="{{ url_for('voter_id', constituency_code=constituency.code) }}">
+        <div class="form-group">
+            <label for="voter_id">Voter ID</label>
+            <input type="text" class="form-control" id="voter_id" name="voter_id" required>
+        </div>
+        <button type="submit" class="btn btn-primary mt-3">Submit</button>
+    </form>
+
+{% endblock %}

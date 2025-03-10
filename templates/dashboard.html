@@ -1,0 +1,40 @@
+<!-- templates/dashboard.html -->
+{% extends 'base.html' %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <h2 class="text-center">Dashboard</h2>
+
+            {% if session.get('user_name') %}
+                <div class="alert alert-success" role="alert">
+                    Welcome, {{ session['user_name'] }}! You are now logged in.
+                </div>
+                <h2>Select Constituency</h2>
+                <form method="POST">
+                    <div class="form-group">
+                        <label for="constituency">Choose Constituency</label>
+                        <select class="form-control" id="constituency" name="constituency">
+                            {% for constituency in constituencies %}
+                                <option value="{{ constituency.code }}">{{ constituency.id }} {{ constituency.name }} ({{ constituency.code }})</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary mt-3">Select</button>
+                </form>
+                <div class="text-center">
+                    <a href="{{ url_for('logout') }}" class="btn btn-danger">Logout</a>
+                </div>
+            {% else %}
+                <div class="alert alert-warning" role="alert">
+                    Please log in to access the dashboard.
+                </div>
+                <div class="text-center">
+                    <a href="{{ url_for('login') }}" class="btn btn-primary">Login</a>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block title %}Vote{% endblock %}
+
+{% block content %}
+    <h2>Vote for a Candidate in {{ constituency.name }}</h2>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Party Name</th>
+                <th>Candidate Name</th>
+                <th>Symbol</th>
+                <th>Vote</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for part in party %}
+            <tr>
+                <td>{{ part.party_name }}</td>
+                <td>{{ part.candidate_name }}</td>
+                <td>
+                    <!-- Display the image using the link from the parties table -->
+                    <img src="{{ part.link }}" alt="{{ part.party_name }}" style="width: 50px; height: auto;">
+                </td>
+                <td>
+                    <form method="POST">
+                        <input type="hidden" name="party_id" value="{{ part.id }}">
+                        <button type="submit" class="btn btn-success">Vote</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
